@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/react'
-
-export const PriceFrequencyChartSection = () => {
-  return <Box>bar chart</Box>
+import { Flex, FlexProps } from '@chakra-ui/react'
+interface PriceFrequencyChartSectionProps extends FlexProps {}
+export const PriceFrequencyChartSection: React.FC<PriceFrequencyChartSectionProps> = ({ ...props }) => {
+  return <Flex {...props}>bar chart</Flex>
 }
