@@ -1,22 +1,27 @@
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay } from '@chakra-ui/react'
+import { Suspense } from 'react'
 import { Customer } from '../../typedef/customer'
-import { Purchase } from '../../typedef/purchase'
+import { EmptyFallback } from '../common/EmptyFallback'
+import { PurchasesContent } from './PurchasesContent'
+import { PurchasesSkeleton } from './PurchasesSkeleton'
 
 interface CustomerDataModalProps {
   isOpen: boolean
   customer: Customer | null
-  purchases: Purchase[]
   onClose: () => void
 }
-export const CustomerDataModal: React.FC<CustomerDataModalProps> = ({ isOpen, customer, purchases, onClose }) => {
+export const CustomerDataModal: React.FC<CustomerDataModalProps> = ({ isOpen, customer, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>구매 내역</ModalHeader>
+      <ModalContent maxWidth="90vw" h="80vh">
+        <ModalHeader>{customer?.name}님의 구매 내역</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {customer?.name} - {purchases?.[0]?.product}
+          <Suspense fallback={<PurchasesSkeleton />}>
+            {customer && <PurchasesContent customer={customer} />}
+            {!customer && <EmptyFallback title="No Result" />}
+          </Suspense>
         </ModalBody>
       </ModalContent>
     </Modal>

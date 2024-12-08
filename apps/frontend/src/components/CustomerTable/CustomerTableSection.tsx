@@ -1,6 +1,5 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
 import { useCallback, useState } from 'react'
-import { useFetchCustomerPurchasesQuery } from '../../hooks/useFetchCustomerPurchasesQuery'
 import { useFetchCustomersQuery } from '../../hooks/useFetchCustomersQuery'
 import { Customer } from '../../typedef/customer'
 import { CustomerDataModal } from '../CustomerDataModal/CustomerDataModal'
@@ -11,10 +10,6 @@ export const CustomerTableSection = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const { data: customers = [] } = useFetchCustomersQuery({}, { suspense: true })
-  const { data: customerPurchanses = [] } = useFetchCustomerPurchasesQuery(targetCustomer?.id, {
-    suspense: true,
-    enabled: !!targetCustomer,
-  })
 
   const handleOpenModal = useCallback(
     (customer: Customer) => {
@@ -27,7 +22,7 @@ export const CustomerTableSection = () => {
   return (
     <Box>
       <CustomerTable customers={customers} onClickRow={handleOpenModal} />
-      <CustomerDataModal isOpen={isOpen} customer={targetCustomer} purchases={customerPurchanses} onClose={onClose} />
+      <CustomerDataModal isOpen={isOpen} customer={targetCustomer} onClose={onClose} />
     </Box>
   )
 }
