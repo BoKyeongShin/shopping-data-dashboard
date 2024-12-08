@@ -1,9 +1,11 @@
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Customer } from '../../typedef/customer'
 
 interface CustomerTableProps {
-  onClickRow: () => void
+  customers: Customer[]
+  onClickRow: (customer: Customer) => void
 }
-export const CustomerTable: React.FC<CustomerTableProps> = ({ onClickRow }) => {
+export const CustomerTable: React.FC<CustomerTableProps> = ({ customers, onClickRow }) => {
   return (
     <TableContainer>
       <Table variant="simple">
@@ -16,12 +18,16 @@ export const CustomerTable: React.FC<CustomerTableProps> = ({ onClickRow }) => {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr _hover={{ cursor: 'pointer' }} onClick={onClickRow}>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>2</Td>
-            <Td isNumeric>10</Td>
-          </Tr>
+          {customers.map((customer) => {
+            return (
+              <Tr key={customer.id} _hover={{ cursor: 'pointer' }} onClick={() => onClickRow(customer)}>
+                <Td>{customer.id}</Td>
+                <Td>{customer.name}</Td>
+                <Td isNumeric>{customer.count}</Td>
+                <Td isNumeric>{customer.totalAmount}</Td>
+              </Tr>
+            )
+          })}
         </Tbody>
       </Table>
     </TableContainer>
