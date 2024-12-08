@@ -9,8 +9,9 @@ export interface Customer {
   totalAmount: number
 }
 
+export type SortBy = 'asc' | 'desc'
 export interface FetchCustomersApiParam {
-  sortBy?: 'asc' | 'desc'
+  sortBy?: SortBy
   name?: string
 }
 
