@@ -1,11 +1,16 @@
-import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
-import { Customer } from '../../typedef/customer'
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons'
+import { Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { formatToKRW } from '../../services/money'
+import { Customer, SortBy } from '../../typedef/customer'
 
 interface CustomerTableProps {
   customers: Customer[]
+  sortBy?: SortBy
+  onSortToggle: () => void
   onClickRow: (customer: Customer) => void
 }
-export const CustomerTable: React.FC<CustomerTableProps> = ({ customers, onClickRow }) => {
+
+export const CustomerTable: React.FC<CustomerTableProps> = ({ customers, sortBy, onSortToggle, onClickRow }) => {
   return (
     <TableContainer>
       <Table variant="simple">
@@ -13,8 +18,16 @@ export const CustomerTable: React.FC<CustomerTableProps> = ({ customers, onClick
           <Tr>
             <Th>고객 ID</Th>
             <Th>이름</Th>
-            <Th isNumeric>구매 횟수</Th>
-            <Th isNumeric>총 구매 금액</Th>
+            <Th>구매 횟수</Th>
+            <Th>
+              <Button
+                variant="ghost"
+                rightIcon={sortBy === 'asc' ? <ArrowUpIcon /> : sortBy === 'desc' ? <ArrowDownIcon /> : undefined}
+                onClick={onSortToggle}
+              >
+                총 구매 금액
+              </Button>
+            </Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -23,8 +36,8 @@ export const CustomerTable: React.FC<CustomerTableProps> = ({ customers, onClick
               <Tr key={customer.id} _hover={{ cursor: 'pointer' }} onClick={() => onClickRow(customer)}>
                 <Td>{customer.id}</Td>
                 <Td>{customer.name}</Td>
-                <Td isNumeric>{customer.count}</Td>
-                <Td isNumeric>{customer.totalAmount}</Td>
+                <Td>{customer.count}</Td>
+                <Td>{formatToKRW(customer.totalAmount)}</Td>
               </Tr>
             )
           })}

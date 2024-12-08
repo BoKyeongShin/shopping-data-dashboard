@@ -2,6 +2,7 @@ import { Flex, Image, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import React from 'react'
 import { PURCHASE_HEADER } from '../../constant/purchase'
 import { useFetchCustomerPurchasesQuery } from '../../hooks/useFetchCustomerPurchasesQuery'
+import { formatToKRW } from '../../services/money'
 import { Customer } from '../../typedef/customer'
 
 interface PurchasesContentProps {
@@ -26,7 +27,7 @@ export const PurchasesContent: React.FC<PurchasesContentProps> = ({ customer }) 
         {purchases.map((purchase) => (
           <Tr key={purchase.date}>
             <Td>{purchase.date}</Td>
-            <Td>{purchase.price}</Td>
+            <Td>{formatToKRW(purchase.price)}</Td>
             <Td>
               <Flex>
                 {purchase.product}
