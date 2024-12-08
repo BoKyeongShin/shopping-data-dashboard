@@ -1,6 +1,5 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
-import { useCallback, useEffect, useState } from 'react'
-import { fetchCustomerPurchasesApi } from '../../api/customer/customer'
+import { useCallback, useState } from 'react'
 import { useFetchCustomerPurchasesQuery } from '../../hooks/useFetchCustomerPurchasesQuery'
 import { useFetchCustomersQuery } from '../../hooks/useFetchCustomersQuery'
 import { Customer } from '../../typedef/customer'
@@ -16,18 +15,6 @@ export const CustomerTableSection = () => {
     suspense: true,
     enabled: !!targetCustomer,
   })
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const res = await fetchCustomerPurchasesApi(1)
-        console.log(res)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    fetch()
-  }, [])
 
   const handleOpenModal = useCallback(
     (customer: Customer) => {
