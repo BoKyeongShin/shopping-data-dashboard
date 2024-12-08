@@ -17,8 +17,6 @@ export const useFetchCustomerPurchasesQuery = <TData = FetchCustomerPurchasesApi
       if (payload === undefined) {
         return Promise.reject(new Error('Payload is undefined'))
       }
-      // test
-      await new Promise((resolve) => setTimeout(resolve, 5000))
       return fetchCustomerPurchasesApi(payload)
     },
     ...options,
