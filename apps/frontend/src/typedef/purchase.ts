@@ -10,10 +10,8 @@ export interface FetchPurchaseFrequencyApiParam {
   to: string
 }
 export interface PurchaseFrequency {
-  productId: number
-  customerId: number
-  quantity: number
-  date: string
+  range: string
+  count: number
 }
 
 export type FetchPurchaseFrequencyApiResponse = PurchaseFrequency[]
