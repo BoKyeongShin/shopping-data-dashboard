@@ -15,8 +15,10 @@
     "@emotion/styled": "^11",
     "@tanstack/react-query": "4",
     "@tanstack/react-query-devtools": "4",
+    "chart.js": "^4.4.7",
     "framer-motion": "^6",
     "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
