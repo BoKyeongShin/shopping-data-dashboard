@@ -1,5 +1,6 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons'
 import { Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { CUSTOMER_HEADER } from '../../constant/customer'
 import { formatToKRW } from '../../services/money'
 import { Customer, SortBy } from '../../typedef/customer'
 
@@ -16,18 +17,21 @@ export const CustomerTable: React.FC<CustomerTableProps> = ({ customers, sortBy,
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th>고객 ID</Th>
-            <Th>이름</Th>
-            <Th>구매 횟수</Th>
-            <Th>
-              <Button
-                variant="ghost"
-                rightIcon={sortBy === 'asc' ? <ArrowUpIcon /> : sortBy === 'desc' ? <ArrowDownIcon /> : undefined}
-                onClick={onSortToggle}
-              >
-                총 구매 금액
-              </Button>
-            </Th>
+            {CUSTOMER_HEADER.map((title) => (
+              <Th key={title}>
+                {title === '총 구매 금액' ? (
+                  <Button
+                    variant="ghost"
+                    rightIcon={sortBy === 'asc' ? <ArrowUpIcon /> : sortBy === 'desc' ? <ArrowDownIcon /> : undefined}
+                    onClick={onSortToggle}
+                  >
+                    {title}
+                  </Button>
+                ) : (
+                  title
+                )}
+              </Th>
+            ))}
           </Tr>
         </Thead>
         <Tbody>
