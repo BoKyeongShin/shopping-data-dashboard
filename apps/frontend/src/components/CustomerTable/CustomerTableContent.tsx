@@ -1,4 +1,4 @@
-import { Box, Input, useDisclosure } from '@chakra-ui/react'
+import { Box, useDisclosure } from '@chakra-ui/react'
 import { Suspense, useCallback, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Customer, SortBy } from '../../typedef/customer'
@@ -6,6 +6,7 @@ import { ErrorFallback } from '../common/ErrorFallback'
 import { CustomerDataModal } from '../CustomerDataModal/CustomerDataModal'
 import { CustomerTableSkeleton } from './CustomerTableSkeleton'
 import { CustomerTableWrapper } from './CustomerTableWrapper'
+import { SearchInput } from './SearchInput'
 
 export const CustomerTableContent = () => {
   const [targetCustomer, setTargetCustomer] = useState<Customer | null>(null)
@@ -29,13 +30,13 @@ export const CustomerTableContent = () => {
     })
   }, [])
 
-  const handleFilterChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterName(e.target.value)
+  const handleFilterChange = useCallback((name: string) => {
+    setFilterName(name)
   }, [])
 
   return (
     <Box w="full" overflowY="auto">
-      <Input placeholder="이름을 입력하세요" value={filterName} onChange={handleFilterChange} mb={4} />
+      <SearchInput placeholder="이름을 입력하세요" mb={4} onUpdateValue={handleFilterChange} />
       <ErrorBoundary fallbackRender={({ resetErrorBoundary }) => <ErrorFallback onRefresh={resetErrorBoundary} />}>
         <Suspense fallback={<CustomerTableSkeleton />}>
           <CustomerTableWrapper
