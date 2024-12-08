@@ -26,6 +26,6 @@ export const handlers = [
 
     // 데이터 생성 및 반환(BE 코드 참고)
     const mockData = generateFrequencyData()
-    return res(ctx.status(200), ctx.json(mockData))
+    return res(ctx.delay(1000), ctx.json(mockData))
   }),
 ]
