@@ -4,7 +4,7 @@ import { PriceFrequencyChartSection } from './components/PriceFrequencyChart/Pri
 
 function App() {
   return (
-    <Flex flexDirection="column" w="full" h="100vh">
+    <Flex flexDirection="column" w="full" h="100vh" px={3}>
       <PriceFrequencyChartSection flex={1} />
       <CustomerTableSection flex={1} />
     </Flex>
