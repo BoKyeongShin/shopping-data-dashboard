@@ -6,6 +6,10 @@ const GAP = 4
 const INPUT_HEIGHT = 40 + 4 * GAP
 
 interface PriceFrequencyChartSectionProps extends FlexProps {}
+
+/**
+ * @description 사용자 입력으로 시작 및 종료 날짜를 설정하여 그 기간 동안 데이터를 보여주는 차트가 포함되어 있습니다.
+ */
 export const PriceFrequencyChartSection: React.FC<PriceFrequencyChartSectionProps> = ({ ...props }) => {
   const [fromDateInput, setFromDateInput] = useState<string>('2024-07-01')
   const [toDateInput, setToDateInput] = useState<string>('2024-07-31')

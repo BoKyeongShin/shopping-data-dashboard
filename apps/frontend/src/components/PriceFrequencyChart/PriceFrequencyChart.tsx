@@ -26,6 +26,11 @@ interface PriceFrequencyChartProps extends BoxProps {
   range: { from: string; to: string }
 }
 
+/**
+ * @description 특정 기간 동안의 가격대별 구매 빈도를 시각화하는 바 차트 컴포넌트입니다.
+ * - React Query의 suspense 옵션이 활성화 되어 있고, 전달된 range를 통해 업데이트 됩니다.
+ * @param range - 구매 빈도를 조회할 기간 (예: { from: '2024-07-01', to: '2024-07-31' }).
+ */
 export const PriceFrequencyChart: React.FC<PriceFrequencyChartProps> = ({ range, ...props }) => {
   const { data: purchaseFrequency = [] } = useFetchPurchaseFrequencyQuery(
     { from: range.from, to: range.to },

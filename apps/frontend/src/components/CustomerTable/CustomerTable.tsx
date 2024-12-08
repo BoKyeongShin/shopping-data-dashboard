@@ -11,6 +11,12 @@ interface CustomerTableProps {
   onClickRow: (customer: Customer) => void
 }
 
+/**
+ * @description 고객 데이터를 테이블 형태로 렌더링하는 컴포넌트입니다.
+ * 고객 ID, 이름, 구매 횟수, 총 구매 금액을 표시합니다.
+ * 총 구매 금액 열은 정렬 기능을 지원하며, 정렬 상태에 따라 아이콘으로 시각적 표시를 제공합니다.
+ * 각 행은 클릭 이벤트를 지원하며, 이를 통해 고객 상세 정보를 열람할 수 있습니다.
+ */
 export const CustomerTable: React.FC<CustomerTableProps> = ({ customers, sortBy, onSortToggle, onClickRow }) => {
   return (
     <TableContainer>
