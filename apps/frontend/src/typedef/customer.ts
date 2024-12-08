@@ -1,3 +1,5 @@
+import { Purchase } from './purchase'
+
 export type FetchCustomersApiResponse = Customer[]
 
 export interface Customer {
@@ -11,3 +13,5 @@ export interface FetchCustomersApiParam {
   sortBy?: 'asc' | 'desc'
   name?: string
 }
+
+export type FetchCustomerPurchasesApiResponse = Purchase[]
