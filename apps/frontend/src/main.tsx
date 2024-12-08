@@ -5,6 +5,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 
+if (process.env.NODE_ENV === 'development') {
+  import('./mock/browser').then(({ worker }) => {
+    worker.start({
+      onUnhandledRequest: 'bypass',
+    })
+  })
+}
 // Create a client
 const queryClient = new QueryClient()
 
